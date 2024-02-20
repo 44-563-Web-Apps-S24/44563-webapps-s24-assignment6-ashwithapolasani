@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
-<title>Animal Game</title>
-
+<head>
+    <title>Webapps-Assignment06</title>
+</head>
 <body>
     <h1>Animal game by Ashwitha Reddy polasani</h1>
+    <h2>Getting input</h2>
 
-    <form>
-        <label for="Hidden Animal">The hidden animal type </label><br />
-        <input type="password" id="form1_HiddenAnimal" value="Chicken" /> <br />
-
-        <label for="Guess Animal">Guess the animal</label><br />
-        <input type="text" id="form1_GuessAnimal" autofocus /> <br />
-
-        <input type="button" onclick="checkAnimal()" value="Check the guess">
+    <form id="animalForm">
+        <label for="hidden-animal">The hidden animal type:</label>
+        <input type="password" id="hidden-animal" value="Chicken"><br>
+        <label for="guess-animal">Guess the animal:</label>
+        <input type="text" id="guess-animal"> <br>
+        <button type="button" onclick="checkAnimal()">Check the guess</button>
     </form>
-
-
-    <p id="result">Your result </p>
+    <p id="result"></p>
 
     <div id="imageContainer">
-        <img src="image1.jpg" alt="apple_juice" onclick="selectImage()" width="150" height="150" />
+        <img src="Orangejuice.jpg" alt="Drink 1" width="150" height="150" onclick="selectImage()">
     </div>
 
     <script>
-        let wrong = 0;
         let correct = 0;
+        let wrong = 0;
         let useImage = 1;
-
+        
         function checkAnimal() {
-            const secretAnimal = document.getElementById("form1_HiddenAnimal").value;
-            const guessAnimal = document.getElementById("form1_GuessAnimal").value;
+            const hiddenAnimal = document.getElementById('hidden-animal').value;
+            const guessedAnimal = document.getElementById('guess-animal').value;
 
-            if (secretAnimal === guessAnimal) {
+            if (hiddenAnimal.toLowerCase() === guessedAnimal.toLowerCase()) {
                 correct++;
                 alert("Ruff ruff");
             } else {
                 wrong++;
                 alert("Grrrr");
             }
-
-            document.getElementById("result").innerHTML = `Correct guesses: ${correct}, Wrong guesses: ${wrong}`;
+            document.getElementById('result').innerHTML = `<p>Correct guesses: ${correct}</p><p>Wrong guesses: ${wrong}</p>`;
+            // Bonus
+            if (wrong > correct) {
+                document.getElementById('animalForm').onclick = function() {
+                    alert('Sorry, too many wrong guesses.');
+                };
+            }
         }
+
         function selectImage() {
             switch (useImage) {
                 case 1:
-                    document.querySelector("#imageContainer img").src = "Applecider.jpg";
+                    document.getElementById("imageContainer").innerHTML = '<img src="Applecider.jpg" alt="Drink 2" width="150" height="150" onclick="selectImage()">';
                     useImage = 2;
                     break;
                 case 2:
-                    document.querySelector("#imageContainer img").src = "Orangejuice.jpg";
+                    document.getElementById("imageContainer").innerHTML = '<img src="Lemonade.jpg" alt="Drink 3" width="150" height="150" onclick="selectImage()">';
                     useImage = 3;
                     break;
                 case 3:
-                    document.querySelector("#imageContainer img").src = "Lemonade.jpg";
+                    document.getElementById("imageContainer").innerHTML = '<img src="Orangejuice.jpg" alt="Drink 1" width="150" height="150" onclick="selectImage()">';
                     useImage = 1;
-                    break;
-                default:
                     break;
             }
         }
     </script>
-
 </body>
-
 </html>
