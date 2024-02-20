@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Discount Apps</title>
+</head>
+
+<body>
+
+<h2>Ashwitha Reddy polasani discount calculations</h2>
+
+<form>
+    <label for="price">Enter price per</label>
+    <input type="number" id="price" value="10">
+    <br>
+    <label for="quantity">Enter the number of items</label>
+    <input type="number" id="quantity" value="9">
+    <br>
+    <label for="discount">Enter the discount percent</label>
+    <input type="number" id="discount">
+    <br>
+    <input type="button" onclick="calc_discount()" value="Show total">
+</form>
+<p id="show-total">Replace This</p>
+<form>
+
+    <label for="op1">sum</label>
+    <input type="radio" id="op1" value="sum" name="op" onclick="chooseOp()">
+    <br>
+
+    <label for="op2">mult</label>
+    <input type="radio" id="op2" value="multiply" name="op" onclick="chooseOp()">
+    <br>
+
+    <label for="op3">exp</label>
+    <input type="radio" id="op3" value="exponent" name="op" onclick="chooseOp()">
+
+</form>
+
+<p id="result">This text will be replaced </p>
+
+<script>
+    function calc_discount() {
+        var price = document.getElementById('price').value;
+        var quantity = document.getElementById('quantity').value;
+        var discount = document.getElementById('discount').value;
+        var myOutput = "";
+        
+        for (var i = 0; i < 5; i++) {
+            var totalDiscount = (1 - ((Number(discount) + i) / 100));
+            var totalCost = price * quantity * totalDiscount;
+            myOutput += (Number(discount) + i) + "% is " + totalCost.toFixed(1) + "; ";
+        }
+        
+        document.getElementById('show-total').innerHTML = "Totals are: " + myOutput;
+    }
+
+    function chooseOp() {
+    var price = parseFloat(document.getElementById('price').value);
+    var discount = parseFloat(document.getElementById('discount').value);
+
+    if (document.getElementById('op1').checked) {
+        document.getElementById('result').innerHTML = `Sum of ${price} and ${discount} is ${price + discount}`;
+    }
+    if (document.getElementById('op2').checked) {
+        document.getElementById('result').innerHTML = `Difference between ${price} and ${discount} is ${price - discount}`;
+    }
+    if (document.getElementById('op3').checked) {
+        document.getElementById('result').innerHTML = `Product of ${price} and ${discount} is ${price * discount}`;
+    }
+}
+</script>
+
+</body>
+
+</html> 
